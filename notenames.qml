@@ -194,6 +194,7 @@ MuseScore {
                         case 3: text.pos.y = 12; break;
                      }
 
+                     text.text=qsTr("<font size=\"8\"/>")+text.text;
                      cursor.add(text);
                      // new text for next element
                      text  = newElement(Element.STAFF_TEXT);
