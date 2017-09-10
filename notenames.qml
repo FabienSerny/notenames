@@ -17,59 +17,79 @@
 import QtQuick 2.0
 import MuseScore 1.0
 
+
 MuseScore {
    version: "2.0"
    description: qsTr("This plugin names notes as per your language setting")
    menuPath: "Plugins.Notes." + qsTr("Note Names") // this does not work, why?
 
+
+	function realNote(string) {
+				// A : la
+				// B : si
+				// C : do
+				// D : ré
+				// E : mi
+				// F : fa
+				// G : sol
+		string = string.replace('A', 'la');
+		string = string.replace('B', 'si');
+		string = string.replace('C', 'do');
+		string = string.replace('D', 'ré');
+		string = string.replace('E', 'mi');
+		string = string.replace('F', 'fa');
+		string = string.replace('G', 'sol');
+		return string;
+	}
+
    function nameChord (notes, text) {
       for (var i = 0; i < notes.length; i++) {
-         var sep = ","; // change to "\n" if you want them vertically, then
-                        // you may need to decrease the text.pos.y values for
-                        // case 0 an 2 (voice 1 and 3) further down (twice)
+         var sep = ","; // change to "\n" if you want them vertically
          if ( i > 0 )
             text.text = sep + text.text; // any but top note
+
+
 
          if (typeof notes[i].tpc === "undefined") // like for grace notes ?!?
             return
          switch (notes[i].tpc) {
-            case -1: text.text = qsTranslate("InspectorAmbitus", "F♭♭") + text.text; break;
-            case  0: text.text = qsTranslate("InspectorAmbitus", "C♭♭") + text.text; break;
-            case  1: text.text = qsTranslate("InspectorAmbitus", "G♭♭") + text.text; break;
-            case  2: text.text = qsTranslate("InspectorAmbitus", "D♭♭") + text.text; break;
-            case  3: text.text = qsTranslate("InspectorAmbitus", "A♭♭") + text.text; break;
-            case  4: text.text = qsTranslate("InspectorAmbitus", "E♭♭") + text.text; break;
-            case  5: text.text = qsTranslate("InspectorAmbitus", "B♭♭") + text.text; break;
-            case  6: text.text = qsTranslate("InspectorAmbitus", "F♭")  + text.text; break;
-            case  7: text.text = qsTranslate("InspectorAmbitus", "C♭")  + text.text; break;
+            case -1: text.text = qsTranslate("InspectorAmbitus", this.realNote("F♭♭")) + text.text; break;
+            case  0: text.text = qsTranslate("InspectorAmbitus", this.realNote("C♭♭")) + text.text; break;
+            case  1: text.text = qsTranslate("InspectorAmbitus", this.realNote("G♭♭")) + text.text; break;
+            case  2: text.text = qsTranslate("InspectorAmbitus", this.realNote("D♭♭")) + text.text; break;
+            case  3: text.text = qsTranslate("InspectorAmbitus", this.realNote("A♭♭")) + text.text; break;
+            case  4: text.text = qsTranslate("InspectorAmbitus", this.realNote("E♭♭")) + text.text; break;
+            case  5: text.text = qsTranslate("InspectorAmbitus", this.realNote("B♭♭")) + text.text; break;
+            case  6: text.text = qsTranslate("InspectorAmbitus", this.realNote("F♭"))  + text.text; break;
+            case  7: text.text = qsTranslate("InspectorAmbitus", this.realNote("C♭"))  + text.text; break;
 
-            case  8: text.text = qsTranslate("InspectorAmbitus", "G♭")  + text.text; break;
-            case  9: text.text = qsTranslate("InspectorAmbitus", "D♭")  + text.text; break;
-            case 10: text.text = qsTranslate("InspectorAmbitus", "A♭")  + text.text; break;
-            case 11: text.text = qsTranslate("InspectorAmbitus", "E♭")  + text.text; break;
-            case 12: text.text = qsTranslate("InspectorAmbitus", "B♭")  + text.text; break;
-            case 13: text.text = qsTranslate("InspectorAmbitus", "F")   + text.text; break;
-            case 14: text.text = qsTranslate("InspectorAmbitus", "C")   + text.text; break;
-            case 15: text.text = qsTranslate("InspectorAmbitus", "G")   + text.text; break;
-            case 16: text.text = qsTranslate("InspectorAmbitus", "D")   + text.text; break;
-            case 17: text.text = qsTranslate("InspectorAmbitus", "A")   + text.text; break;
-            case 18: text.text = qsTranslate("InspectorAmbitus", "E")   + text.text; break;
-            case 19: text.text = qsTranslate("InspectorAmbitus", "B")   + text.text; break;
+            case  8: text.text = qsTranslate("InspectorAmbitus", this.realNote("G♭"))  + text.text; break;
+            case  9: text.text = qsTranslate("InspectorAmbitus", this.realNote("D♭"))  + text.text; break;
+            case 10: text.text = qsTranslate("InspectorAmbitus", this.realNote("A♭"))  + text.text; break;
+            case 11: text.text = qsTranslate("InspectorAmbitus", this.realNote("E♭"))  + text.text; break;
+            case 12: text.text = qsTranslate("InspectorAmbitus", this.realNote("B♭"))  + text.text; break;
+            case 13: text.text = qsTranslate("InspectorAmbitus", this.realNote("F"))   + text.text; break;
+            case 14: text.text = qsTranslate("InspectorAmbitus", this.realNote("C"))   + text.text; break;
+            case 15: text.text = qsTranslate("InspectorAmbitus", this.realNote("G"))   + text.text; break;
+            case 16: text.text = qsTranslate("InspectorAmbitus", this.realNote("D"))   + text.text; break;
+            case 17: text.text = qsTranslate("InspectorAmbitus", this.realNote("A"))   + text.text; break;
+            case 18: text.text = qsTranslate("InspectorAmbitus", this.realNote("E"))   + text.text; break;
+            case 19: text.text = qsTranslate("InspectorAmbitus", this.realNote("B"))   + text.text; break;
 
-            case 20: text.text = qsTranslate("InspectorAmbitus", "F♯")  + text.text; break;
-            case 21: text.text = qsTranslate("InspectorAmbitus", "C♯")  + text.text; break;
-            case 22: text.text = qsTranslate("InspectorAmbitus", "G♯")  + text.text; break;
-            case 23: text.text = qsTranslate("InspectorAmbitus", "D♯")  + text.text; break;
-            case 24: text.text = qsTranslate("InspectorAmbitus", "A♯")  + text.text; break;
-            case 25: text.text = qsTranslate("InspectorAmbitus", "E♯")  + text.text; break;
-            case 26: text.text = qsTranslate("InspectorAmbitus", "B♯")  + text.text; break;
-            case 27: text.text = qsTranslate("InspectorAmbitus", "F♯♯") + text.text; break;
-            case 28: text.text = qsTranslate("InspectorAmbitus", "C♯♯") + text.text; break;
-            case 29: text.text = qsTranslate("InspectorAmbitus", "G♯♯") + text.text; break;
-            case 30: text.text = qsTranslate("InspectorAmbitus", "D♯♯") + text.text; break;
-            case 31: text.text = qsTranslate("InspectorAmbitus", "A♯♯") + text.text; break;
-            case 32: text.text = qsTranslate("InspectorAmbitus", "E♯♯") + text.text; break;
-            case 33: text.text = qsTranslate("InspectorAmbitus", "B♯♯") + text.text; break;
+            case 20: text.text = qsTranslate("InspectorAmbitus", this.realNote("F♯"))  + text.text; break;
+            case 21: text.text = qsTranslate("InspectorAmbitus", this.realNote("C♯"))  + text.text; break;
+            case 22: text.text = qsTranslate("InspectorAmbitus", this.realNote("G♯"))  + text.text; break;
+            case 23: text.text = qsTranslate("InspectorAmbitus", this.realNote("D♯"))  + text.text; break;
+            case 24: text.text = qsTranslate("InspectorAmbitus", this.realNote("A♯"))  + text.text; break;
+            case 25: text.text = qsTranslate("InspectorAmbitus", this.realNote("E♯"))  + text.text; break;
+            case 26: text.text = qsTranslate("InspectorAmbitus", this.realNote("B♯"))  + text.text; break;
+            case 27: text.text = qsTranslate("InspectorAmbitus", this.realNote("F♯♯")) + text.text; break;
+            case 28: text.text = qsTranslate("InspectorAmbitus", this.realNote("C♯♯")) + text.text; break;
+            case 29: text.text = qsTranslate("InspectorAmbitus", this.realNote("G♯♯")) + text.text; break;
+            case 30: text.text = qsTranslate("InspectorAmbitus", this.realNote("D♯♯")) + text.text; break;
+            case 31: text.text = qsTranslate("InspectorAmbitus", this.realNote("A♯♯")) + text.text; break;
+            case 32: text.text = qsTranslate("InspectorAmbitus", this.realNote("E♯♯")) + text.text; break;
+            case 33: text.text = qsTranslate("InspectorAmbitus", this.realNote("B♯♯")) + text.text; break;
             default: text.text = qsTr("?")   + text.text; break;
          } // end switch tpc
 
@@ -183,7 +203,7 @@ MuseScore {
                   nameChord(notes, text);
 
                   switch (voice) {
-                     case 0: text.pos.y =  1; break;
+                     case 0: text.pos.y =  -1; break;
                      case 1: text.pos.y = 10; break;
                      case 2: text.pos.y = -1; break;
                      case 3: text.pos.y = 12; break;
