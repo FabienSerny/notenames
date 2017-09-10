@@ -200,17 +200,29 @@ MuseScore {
                   }
 
                   var notes = cursor.element.notes;
-                  nameChord(notes, text);
 
-                  switch (voice) {
-                     case 0: text.pos.y =  -1; break;
-                     case 1: text.pos.y = 10; break;
-                     case 2: text.pos.y = -1; break;
-                     case 3: text.pos.y = 12; break;
-                  }
-                  if ((voice == 0) && (notes[0].pitch > 83))
-                     text.pos.x = 1;
-                  cursor.add(text);
+                  var iteration = 1 - notes.length;
+                  for (var i = 0; i < notes.length; i++) {
+
+                      var text = newElement(Element.STAFF_TEXT);
+                      var note_array = [ notes[i] ];
+                      nameChord(note_array, text);
+
+                      switch (voice) {
+                         case 0: text.pos.y =  -1; break;
+                         case 1: text.pos.y = 10; break;
+                         case 2: text.pos.y = -1; break;
+                         case 3: text.pos.y = 12; break;
+                      }
+
+                        text.pos.y = text.pos.y + (iteration);
+
+                      if ((voice == 0) && (notes[0].pitch > 83))
+                         text.pos.x = 1;
+                      text.text=qsTr("<font size=\"8\"/>")+text.text;
+                      cursor.add(text);
+                      iteration++;
+                   }
                } // end if CHORD
                cursor.next();
             } // end while segment
